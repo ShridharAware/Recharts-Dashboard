@@ -1,0 +1,17 @@
+.widgetForm {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    background-color: white;
+    width: 40%;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+    z-index: 9999; /* Ensure it's on top of other content */
+  }
+  .bgWhite{
+    background-color: white;
+  }
+  .msg{
+    margin-top: 20px;
+    margin-left: 20px;
+  }

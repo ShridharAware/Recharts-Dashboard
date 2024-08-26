@@ -1,0 +1,30 @@
+.homeContainer,.homeContainer div,.homeContainer span, .homeContainer select  {
+    background-color: white;
+}
+.searchBar {
+    border: 1px solid rgb(174, 174, 255);
+    width: 20rem;
+    border-radius: 5px;
+    height: 28px;
+}
+
+.selectMenu {
+    margin-left: 2rem;
+    border-radius: 3px;
+    width: 10rem;
+}
+
+.icon {
+    margin-left: 2rem;
+}
+
+.profile {
+    margin-left: 2rem;
+}
+
+.rightNavItems {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 25rem;
+}
