@@ -1,10 +1,42 @@
-import { Button, Card, CloseButton, Nav } from "react-bootstrap";
+import { Card, CloseButton, Form, InputGroup } from "react-bootstrap";
 import styles from "./WidgetsChecklist.module.css";
 import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
+import { ChartsInterfaceProps } from "../../interfaces/ChartsInterface";
 
 const WidgetsChecklist = () => {
-  const { changeWidget } = useContext(AppContext);
+  const { changeWidget, charts, changeCharts } = useContext(AppContext);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    const data = Object.fromEntries(formData.entries());
+
+    Object.entries(data).forEach(([key, value]) => {
+      if (isKeyOfChartsInterfaceProps(key)) {
+        const isChecked = value === "on";
+        changeCharts(key as keyof ChartsInterfaceProps, isChecked);
+      }
+    });
+  };
+
+  const isKeyOfChartsInterfaceProps = (
+    key: string
+  ): key is keyof ChartsInterfaceProps => {
+    return [
+      "barchart",
+      "piechart",
+      "doughnutchart",
+      "timelinechart",
+      "addwidget",
+    ].includes(key);
+  };
+
+  const handleCheckboxChange = (key: keyof ChartsInterfaceProps) => {
+    const currentState = charts[key];
+    changeCharts(key, !currentState);
+  };
+
   return (
     <div className={styles.widgetForm}>
       <div>
@@ -17,29 +49,45 @@ const WidgetsChecklist = () => {
         Personalize your dashboard by adding the following widgets
       </div>
 
-      <Card className={`mt-5 w-75 mx-auto ${styles.bgWhite}`}>
-        <Card.Header className={`${styles.bgWhite}`}>
-          <Nav variant="tabs" className={`${styles.bgWhite}`}>
-            <Nav.Item className={`${styles.bgWhite}`}>
-              <Nav.Link>CSPM</Nav.Link>
-            </Nav.Item>
-            <Nav.Item className={`${styles.bgWhite}`}>
-              <Nav.Link>CWPP</Nav.Link>
-            </Nav.Item>
-            <Nav.Item className={`${styles.bgWhite}`}>
-              <Nav.Link>Registery Scan</Nav.Link>
-            </Nav.Item>
-          </Nav>
-        </Card.Header>
+      <Card className={`mt-5 mx-auto ${styles.bgWhite}`}>
         <Card.Body className={`${styles.bgWhite}`}>
           <Card.Title className={`${styles.bgWhite}`}>
-            Special title treatment
+            Select widgets to put on dashboard
           </Card.Title>
-          <Card.Text className={`${styles.bgWhite}`}>
-            With supporting text below as a natural lead-in to additional
-            content.
-          </Card.Text>
-          <Button variant="primary">Go somewhere</Button>
+          <Form onSubmit={handleSubmit} className="mt-5">
+            <InputGroup className="mb-3">
+              <InputGroup.Checkbox
+                name="barchart"
+                checked={charts.barchart}
+                onChange={() => handleCheckboxChange("barchart")}
+              />
+              <Form.Label className="mx-3 my-auto">Barchart</Form.Label>
+            </InputGroup>
+            <InputGroup className="mb-3">
+              <InputGroup.Checkbox
+                name="doughnutchart"
+                checked={charts.doughnutchart}
+                onChange={() => handleCheckboxChange("doughnutchart")}
+              />
+              <Form.Label className="mx-3 my-auto">Doughnutchart</Form.Label>
+            </InputGroup>
+            <InputGroup className="mb-3">
+              <InputGroup.Checkbox
+                name="piechart"
+                checked={charts.piechart}
+                onChange={() => handleCheckboxChange("piechart")}
+              />
+              <Form.Label className="mx-3 my-auto">Piechart</Form.Label>
+            </InputGroup>
+            <InputGroup className="mb-3">
+              <InputGroup.Checkbox
+                name="timelinechart"
+                checked={charts.timelinechart}
+                onChange={() => handleCheckboxChange("timelinechart")}
+              />
+              <Form.Label className="mx-3 my-auto">Timelinechart</Form.Label>
+            </InputGroup>
+          </Form>
         </Card.Body>
       </Card>
     </div>

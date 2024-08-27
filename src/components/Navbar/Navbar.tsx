@@ -1,4 +1,6 @@
 import { NavbarItems } from "../../assets/NavItems";
+import { SlBell, SlMenu } from "react-icons/sl";
+
 import styles from "./Navbar.module.css";
 const Navbar = () => {
   return (
@@ -28,8 +30,12 @@ const Navbar = () => {
               <option value="">Sample 2</option>
             </select>
           </div>
-          <div className={styles.icon}>icon</div>
-          <div className={styles.profile}>Profile info</div>
+          <div className={styles.icon}>
+            <SlBell size="20" />
+          </div>
+          <div className={styles.profile}>
+            <SlMenu size="20" />
+          </div>
         </div>
       </div>
     </>

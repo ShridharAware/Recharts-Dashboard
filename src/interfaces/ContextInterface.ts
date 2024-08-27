@@ -8,6 +8,10 @@ export interface ContextInterfaceProps {
     piechart: boolean;
     doughnutchart: boolean;
     timelinechart: boolean;
+    addwidget: boolean;
   };
-  changeCharts: (chartType: keyof ChartsInterfaceProps) => void;
+  changeCharts: (
+    chartType: keyof ChartsInterfaceProps,
+    enabled: boolean
+  ) => void;
 }

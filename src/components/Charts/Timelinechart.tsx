@@ -1,5 +1,14 @@
-import { BarChart, Bar, Cell } from "recharts";
+import {
+  BarChart,
+  Bar,
+  Cell,
+  ResponsiveContainer,
+  Legend,
+  Tooltip,
+  XAxis,
+} from "recharts";
 import { ChartDataProps } from "../../interfaces/ChartDataInterface";
+import CardCloseButton from "./CardCloseButton";
 
 const Timelinechart: React.FC<ChartDataProps> = ({ data }) => {
   const timelineData = data.data.map((entry) => {
@@ -17,19 +26,19 @@ const Timelinechart: React.FC<ChartDataProps> = ({ data }) => {
   });
   return (
     <>
-      <BarChart
-        width={200}
-        height={206}
-        data={timelineData}
-        barCategoryGap={0}
-        barGap={0}
-      >
-        <Bar dataKey="height">
-          {timelineData.map((entry) => (
-            <Cell fill={entry.color} />
-          ))}
-        </Bar>
-      </BarChart>
+      <ResponsiveContainer width="100%" height={250}>
+        <BarChart data={timelineData} barCategoryGap={0} barGap={0}>
+          <XAxis dataKey="name" />
+          <Legend />
+          <Tooltip />
+          <Bar dataKey="height">
+            {timelineData.map((entry) => (
+              <Cell fill={entry.color} />
+            ))}
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
+      <CardCloseButton data={"timelinechart"} />
     </>
   );
 };

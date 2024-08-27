@@ -10,12 +10,14 @@ export const AppContext = createContext<ContextInterfaceProps>({
     piechart: false,
     doughnutchart: false,
     timelinechart: false,
+    addwidget: true,
   },
   changeCharts: () => {},
 });
 
 const ContextProvider: React.FC<{ children: ReactNode }> = (props) => {
   const [widgets, setWidgets] = useState<boolean>(false);
+
   const changeWidget = () => {
     setWidgets((prev) => !prev);
   };
@@ -25,12 +27,16 @@ const ContextProvider: React.FC<{ children: ReactNode }> = (props) => {
     piechart: false,
     doughnutchart: false,
     timelinechart: false,
+    addwidget: true,
   });
 
-  const changeCharts = (chartType: keyof ChartsInterfaceProps) => {
+  const changeCharts = (
+    chartType: keyof ChartsInterfaceProps,
+    enabled: boolean
+  ) => {
     setCharts((prevCharts) => ({
       ...prevCharts,
-      [chartType]: !prevCharts[chartType],
+      [chartType]: enabled,
     }));
   };
   return (

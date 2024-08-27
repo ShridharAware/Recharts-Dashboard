@@ -1,13 +1,20 @@
-import { PieChart, Pie, Cell } from "recharts";
+import {
+  PieChart,
+  Pie,
+  Cell,
+  ResponsiveContainer,
+  Legend,
+  Tooltip,
+} from "recharts";
 import { ChartDataProps } from "../../interfaces/ChartDataInterface";
-
+import CardCloseButton from "./CardCloseButton";
 const Doughnutchart: React.FC<ChartDataProps> = ({ data }) => {
   const timelineData = data.data.map((entry) => {
     let color;
     if (entry.value < 100) {
       color = "red";
     } else if (entry.value > 100 && entry.value < 200) {
-      color = "yellow";
+      color = "black";
     } else if (entry.value > 200 && entry.value < 300) {
       color = "green";
     } else {
@@ -17,8 +24,10 @@ const Doughnutchart: React.FC<ChartDataProps> = ({ data }) => {
   });
   return (
     <>
-      <div style={{ backgroundColor: "white" }}>
-        <PieChart width={200} height={206}>
+      <ResponsiveContainer width="100%" height={250}>
+        <PieChart>
+          <Tooltip />
+          <Legend />
           <Pie
             data={data.data}
             outerRadius={80}
@@ -31,7 +40,8 @@ const Doughnutchart: React.FC<ChartDataProps> = ({ data }) => {
             ))}
           </Pie>
         </PieChart>
-      </div>
+      </ResponsiveContainer>
+      <CardCloseButton data={"doughnutchart"} />
     </>
   );
 };

@@ -3,4 +3,5 @@ export interface ChartsInterfaceProps {
   piechart: boolean;
   doughnutchart: boolean;
   timelinechart: boolean;
+  addwidget: boolean;
 }
