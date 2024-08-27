@@ -27,7 +27,4 @@ npm run dev
 ```
 
 Step 5:
-
-```
-[Visit Dashboard](http://localhost:5173/)
-```
+[Visit Dashboard Application](http://localhost:5173/)
